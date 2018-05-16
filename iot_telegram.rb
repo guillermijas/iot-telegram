@@ -14,6 +14,10 @@ class IotTelegram < Roda
         @telegram.send_message("Llaman a la puerta")
         'Se ha avisado del timbre'
       end
+      r.is 'pendig' do
+        @telegram.send_message("Llaman a la puerta")
+        'Se ha avisado del timbre'
+      end
       r.is 'alarma' do
         5.times do
           @telegram.send_message("ALARMA")

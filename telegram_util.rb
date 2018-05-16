@@ -1,7 +1,7 @@
 require 'telegram/bot'
 require 'yaml'
 
-config = YAML.load_file('secrets.yaml')
+config = YAML.load_file('app_config.yaml')
 TOKEN = config['bot_token']
 TARGET_USER_ID = config['user_id']
 
