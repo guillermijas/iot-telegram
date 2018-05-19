@@ -1,7 +1,9 @@
-require 'roda'
 require './telegram_util'
 
 class IotTelegram < Roda
+
+  Thread.start { TelegramUtil.new.start_server }
+  
   route do |r|
     @telegram = TelegramUtil.new
     
@@ -15,8 +17,8 @@ class IotTelegram < Roda
         'Se ha avisado del timbre'
       end
       r.is 'pendig' do
-        @telegram.send_message("Llaman a la puerta")
-        'Se ha avisado del timbre'
+        @telegram.send_message("pendiente")
+        'Se ha avisado la operacion pendiente'
       end
       r.is 'alarma' do
         5.times do
