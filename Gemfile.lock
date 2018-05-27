@@ -16,6 +16,7 @@ GEM
     ice_nine (0.11.2)
     inflecto (0.0.2)
     multipart-post (2.0.0)
+    puma (3.11.4)
     rack (2.0.5)
     roda (3.8.0)
       rack
@@ -35,12 +36,10 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  puma
   rack
   roda
   telegram-bot-ruby
-
-RUBY VERSION
-   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.2
