@@ -1,14 +1,14 @@
-
 # Change to match your CPU core count
 workers 1
 
 # Min and Max threads per worker
 threads 1, 4
 
-shared_dir = '/var/shared'
+shared_dir = '/tmp'
 
 # Set up socket location
-bind "unix://#{shared_dir}/app.sock?umask=0000"
+bind "unix://#{shared_dir}/puma.sock"
+# bind 'tcp://localhost:3000'
 
 # Logging
 stdout_redirect "#{shared_dir}/puma.stdout.log",

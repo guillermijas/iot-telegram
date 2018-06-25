@@ -2,7 +2,7 @@ FROM nginx:1.15.0
 
 WORKDIR /app
 
-COPY ./config/nginx.txt /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 80
 

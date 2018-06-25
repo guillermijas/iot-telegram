@@ -14,4 +14,4 @@ user_id:
   YOUR_USER_ID
 ```
 
-Copiar el archivo config/nginx.txt a 
+Copiar el archivo config/nginx.txt a /etc/nginx/sites-available/default
