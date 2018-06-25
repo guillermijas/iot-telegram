@@ -1,0 +1,27 @@
+upstream my-application {
+    server unix:/var/shared/app.sock fail_timeout=0;
+}
+server {
+  listen 80;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
+  error_page 500 502 504 /500.html;
+  error_page 503 @503;
+  server_name localhost my-application;
+  root /app/public;
+  try_files $uri/index.html $uri @my-application;
+  location @my-application {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://my-application;
+    access_log /var/log/nginx.access.log;
+    error_log /var/log/nginx.error.log;
+  }
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+}
+

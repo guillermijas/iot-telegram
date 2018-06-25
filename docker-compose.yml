@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./web.DockerFile
+    depends_on:
+      - app
+    ports:
+      - 8080:80
+  app:
+    build:
+      context: .
+      dockerfile: ./app.DockerFile

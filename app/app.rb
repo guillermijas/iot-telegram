@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './telegram_util'
+require './app/telegram_util.rb'
 
 class IotTelegram < Roda
   Thread.start { TelegramUtil.new.start_server }
@@ -15,17 +15,15 @@ class IotTelegram < Roda
     r.get do
       r.is 'timbre' do
         @telegram.send_message('Llaman a la puerta')
-        'Se ha avisado del timbre'
+        'ok'
       end
       r.is 'pendig' do
         @telegram.send_message('pendiente')
-        'Se ha avisado la operacion pendiente'
+        'ok'
       end
       r.is 'alarma' do
-        5.times do
-          @telegram.send_message('ALARMA')
-        end
-        'Se ha enviado la alerta'
+        @telegram.send_message('ALARMA')
+        'ok'
       end
     end
   end

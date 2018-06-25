@@ -1,22 +1,20 @@
-# frozen_string_literal: true
 
 # Change to match your CPU core count
 workers 1
 
 # Min and Max threads per worker
-threads 1, 6
+threads 1, 4
 
-# Default to production
-rails_env = ENV['RAILS_ENV'] || 'production'
-environment rails_env
+shared_dir = '/var/shared'
 
 # Set up socket location
-bind 'unix:///tmp/puma.sock'
+bind "unix://#{shared_dir}/app.sock?umask=0000"
 
 # Logging
-stdout_redirect '/tmp/puma.stdout.log', '/tmp/puma.stderr.log', true
+stdout_redirect "#{shared_dir}/puma.stdout.log",
+                "#{shared_dir}/puma.stderr.log",
+                true
 
 # Set master PID and state locations
-pidfile '/tmp/puma.pid'
-state_path '/tmp/puma.state'
-activate_control_app
+pidfile "#{shared_dir}/puma.pid"
+state_path "#{shared_dir}/puma.state"
