@@ -3,7 +3,7 @@
 require './app/telegram_util.rb'
 
 class IotTelegram < Roda
-  Thread.start { TelegramUtil.new.start_listen_server }
+  # Thread.start { TelegramUtil.new.start_listen_server }
 
   route do |r|
     @telegram = TelegramUtil.new
@@ -18,11 +18,15 @@ class IotTelegram < Roda
         'ok'
       end
       r.is 'alarma_puerta' do
-        @telegram.send_message('ALARMA PUERTA')
+        @telegram.start_alarm_door
         'ok'
       end
       r.is 'alarma_ventana' do
-        @telegram.send_message('ALARMA VENTANA')
+        @telegram.start_alarm_window
+        'ok'
+      end
+      r.is 'alarma_off' do
+        @telegram.stop_alarm
         'ok'
       end
       r.is 'command' do
