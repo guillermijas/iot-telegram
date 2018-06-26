@@ -30,7 +30,7 @@ class IotTelegram < Roda
         'ok'
       end
       r.is 'command' do
-        @telegram.next_command
+        @telegram.next_command || 'null'
       end
     end
   end
