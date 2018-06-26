@@ -5,7 +5,11 @@ RUN mkdir -p /var/shared
 
 WORKDIR /app
 ADD . /app
-RUN gem install bundler && bundle install
+RUN gem install bundler
+RUN gem install bundler
+RUN gem install puma
+RUN gem install sqlite3
+RUN bundle install
 
 EXPOSE 3000
 
