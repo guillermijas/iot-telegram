@@ -6,6 +6,8 @@ services:
       dockerfile: ./docker/app.DockerFile
     ports:
       - "3000:3000"
+    volumes:
+      - .:/app
   web:
     build:
       context: .
@@ -14,3 +16,5 @@ services:
       - app
     ports:
       - "80:80"
+    volumes:
+      - .:/web
