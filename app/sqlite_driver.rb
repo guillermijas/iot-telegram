@@ -5,7 +5,7 @@ require 'sqlite3'
 class SqliteDriver
 
   def initialize
-    @db = SQLite3::Database.new('iotelegram.db')
+    @db = SQLite3::Database.new('./db/iotelegram.db')
   end
 
   def select_last_request
