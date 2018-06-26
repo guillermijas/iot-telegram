@@ -3,7 +3,7 @@
 require './app/telegram_util.rb'
 
 class IotTelegram < Roda
-  # Thread.start { TelegramUtil.new.start_listen_server }
+  Thread.start { TelegramUtil.new.start_listen_server }
 
   route do |r|
     @telegram = TelegramUtil.new
