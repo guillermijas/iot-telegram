@@ -29,6 +29,10 @@ class IotTelegram < Roda
         @telegram.stop_alarm
         'ok'
       end
+      r.is 'sos' do
+        @telegram.start_sos
+        'ok'
+      end
       r.is 'command' do
         @telegram.next_command || 'null'
       end

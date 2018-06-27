@@ -32,10 +32,10 @@ class TelegramUtil
         when '/modo auto'
           bot_send(bot, 'Modo automátco activado: se activarán alarmas y se apagarán luces')
           @db.insert('modo_auto')
-        when '/mode alarma'
+        when '/modo alarma'
           bot_send(bot, 'Modo alarma activado: se activarán alarmas pero no se apagarán luces')
           @db.insert('modo_alarma')
-        when '/mode off'
+        when '/modo off'
           bot_send(bot, 'Modo apagado activado: el sistema queda inactvo')
           @db.insert('modo_off')
         when '/alarma on'
@@ -63,6 +63,17 @@ class TelegramUtil
     end
   end
 
+  def start_sos
+    return if thread_already_running?('sos')
+    t = Thread.new do
+      loop do
+        send_message('EMERGENCIA')
+        sleep(5)
+      end
+    end
+    t.name = 'sos'
+  end
+
   def start_alarm_door
     return if thread_already_running?('puerta')
     t = Thread.new do
@@ -86,7 +97,7 @@ class TelegramUtil
   end
 
   def stop_alarm
-    Thread.list.each { |t| t.kill if %w[puerta ventana].include?(t.name) }
+    Thread.list.each { |t| t.kill if %w[puerta ventana sos].include?(t.name) }
   end
 
   private
